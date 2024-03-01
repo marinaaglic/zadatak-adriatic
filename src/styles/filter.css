@@ -1,0 +1,27 @@
+.filter-content {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 15px;
+  padding: 0.5rem calc((100vw - 1200px) / 2);
+  background-color: #fffaa0;
+}
+
+.div-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-filter {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: white;
+  background-color: #332fe2;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 0;
+  font-size: 15px;
+  cursor: pointer;
+}
