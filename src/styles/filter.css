@@ -4,6 +4,7 @@
   font-size: 15px;
   padding: 0.5rem calc((100vw - 1200px) / 2);
   background-color: #fffaa0;
+  border-radius: 10px;
 }
 
 .div-filter {
@@ -13,7 +14,7 @@
   gap: 16px;
 }
 
-.btn-filter {
+/* .btn-filter {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   color: white;
@@ -23,5 +24,18 @@
   border-radius: 10px;
   border: 0;
   font-size: 17px;
+  cursor: pointer;
+} */
+
+.btn-search {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: white;
+  background-color: #332fe2;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 0;
+  font-size: 14px;
   cursor: pointer;
 }

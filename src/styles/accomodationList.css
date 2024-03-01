@@ -1,6 +1,5 @@
 .div-accomodation-list {
   padding: 0.5rem calc((100vw - 1200px) / 2);
-  display: grid;
 }
 
 .div-accomodation-list h3 {
@@ -10,6 +9,6 @@
 
 .accomodation-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }

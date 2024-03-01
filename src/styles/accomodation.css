@@ -5,10 +5,19 @@
   padding: 10px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+
+  grid-column: span 1;
+  transition: grid-column 0.3s ease;
+  display: flex;
+  align-items: flex-start;
 }
 
-.div-accomodation h4 {
+.div-accomodation.expanded {
+  grid-column: span 2;
+}
+.div-info h4 {
   font-weight: bolder;
+  width: 100%;
 }
 
 .btn-show-more {
@@ -22,4 +31,22 @@
   border: 0;
   font-size: 13px;
   cursor: pointer;
+}
+
+.div-info {
+  margin-right: 20px;
+}
+
+.div-details {
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.div-amenities {
+  display: flex;
+}
+
+.div-amenities > div {
+  margin-left: 20px;
 }
