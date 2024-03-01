@@ -1,0 +1,25 @@
+.div-accomodation {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 10px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.div-accomodation h4 {
+  font-weight: bolder;
+}
+
+.btn-show-more {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: white;
+  background-color: #332fe2;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 0;
+  font-size: 13px;
+  cursor: pointer;
+}

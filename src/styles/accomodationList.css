@@ -1,0 +1,15 @@
+.div-accomodation-list {
+  padding: 0.5rem calc((100vw - 1200px) / 2);
+  display: grid;
+}
+
+.div-accomodation-list h3 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.accomodation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
