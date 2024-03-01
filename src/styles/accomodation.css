@@ -17,7 +17,6 @@
 }
 .div-info h4 {
   font-weight: bolder;
-  width: 100%;
 }
 
 .btn-show-more {
@@ -41,6 +40,7 @@
   flex-direction: row;
   justify-content: space-between;
   flex-grow: 1;
+  margin-top: 50px;
 }
 
 .div-amenities {

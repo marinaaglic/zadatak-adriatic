@@ -6,12 +6,22 @@ export default function Filter() {
       <h2>Filtriraj prema:</h2>
       <div className="div-filter">
         <div className="div-dates">
-          <input type="date" name="arrival" placeholder="Dolazak" />
-          <input type="date" name="departue" placeholder="Odlazak" />
+          <input
+            type="date"
+            name="arrival"
+            placeholder="Dolazak"
+            min="2024-01-01"
+          />
+          <input
+            type="date"
+            name="departure"
+            placeholder="Odlazak"
+            max="2024-31-12"
+          />
         </div>
         <div className="div-input">
           <label name="numberOfPeople">Broj osoba:</label>
-          <input type="numer" name="numberOfPeople" />
+          <input type="number" name="numberOfPeople" />
         </div>
         <div className="div-amenities-filter">
           <label>Dodatne usluge:</label>
