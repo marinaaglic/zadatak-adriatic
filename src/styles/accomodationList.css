@@ -1,14 +1,20 @@
-.div-accomodation-list {
+.div-accommodation-list {
   padding: 0.5rem calc((100vw - 1200px) / 2);
 }
 
-.div-accomodation-list h3 {
+.div-accommodation-list h3 {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
 
-.accomodation-grid {
+.accommodation-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
+}
+
+.message {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-weight: bolder;
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../../styles/accomodation.css";
 
-export default function Accomodation({ accomodation }) {
+export default function Accommodation({ accommodation }) {
   const {
     title,
     image,
@@ -9,11 +9,11 @@ export default function Accomodation({ accomodation }) {
     beachDistanceInMeters,
     amenities,
     pricelistInEuros,
-  } = accomodation;
+  } = accommodation;
   const [showDetails, setShowDetails] = useState(false);
   const [expanded, setExpanded] = useState(false);
   return (
-    <div className={`div-accomodation ${expanded ? "expanded" : ""}`}>
+    <div className={`div-accommodation ${expanded ? "expanded" : ""}`}>
       <div className="div-info">
         <h4>{title}</h4>
         <img src={image} />
