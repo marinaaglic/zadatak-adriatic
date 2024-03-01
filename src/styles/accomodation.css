@@ -5,7 +5,6 @@
   padding: 10px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-
   grid-column: span 1;
   transition: grid-column 0.3s ease;
   display: flex;
@@ -49,4 +48,30 @@
 
 .div-amenities > div {
   margin-left: 20px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 786px) {
+  .div-accommodation {
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 10px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .div-details {
+    margin-top: 50px;
+  }
+
+  .div-amenities {
+    display: flex;
+  }
 }

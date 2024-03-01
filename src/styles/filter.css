@@ -23,19 +23,6 @@ input {
   padding: 8px 12px;
 }
 
-/* .btn-filter {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  color: white;
-  background-color: #332fe2;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  border: 0;
-  font-size: 17px;
-  cursor: pointer;
-} */
-
 .btn-search,
 .btn-clear {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -49,4 +36,17 @@ input {
   font-size: 14px;
   cursor: pointer;
   margin-right: 10px;
+}
+
+@media screen and (max-width: 786px) {
+  .div-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .div-amenities-filter {
+    display: flex;
+    flex-direction: column;
+  }
 }
