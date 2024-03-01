@@ -48,12 +48,23 @@ export default function Accommodation({ accommodation }) {
             <div>
               <h4>Cijena:</h4>
               <ul>
-                {pricelistInEuros.map((price, index) => (
-                  <li key={index}>
-                    {price.intervalStart} - {price.intervalEnd}:{" "}
-                    {price.pricePerNight}€
-                  </li>
-                ))}
+                {pricelistInEuros.map((price, index) => {
+                  const startDate = new Date(price.intervalStart);
+                  const endDate = new Date(price.intervalEnd);
+                  const formattedStartDate = `${startDate.getDate()}.${
+                    startDate.getMonth() + 1
+                  }.`;
+                  const formattedEndDate = `${endDate.getDate()}.${
+                    endDate.getMonth() + 1
+                  }.`;
+
+                  return (
+                    <li key={index}>
+                      {formattedStartDate} - {formattedEndDate}:{" "}
+                      {price.pricePerNight}€
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

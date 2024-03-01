@@ -25,7 +25,7 @@ export default function AccomodationList() {
     }
   }
 
-  const handleSearch = (filters) => {
+  const searchHandler = (filters) => {
     let filtered = accommodations;
 
     if (filters.arrival && filters.departure) {
@@ -58,7 +58,7 @@ export default function AccomodationList() {
 
   return (
     <div className="div-accommodation-list">
-      <Filter onSearch={handleSearch} />
+      <Filter onSearch={searchHandler} />
       <h3>Accomodations:</h3>
       <div className="accommodation-grid">
         {filteredAccommodations.length > 0 ? (

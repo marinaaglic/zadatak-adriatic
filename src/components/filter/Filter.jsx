@@ -13,13 +13,26 @@ export default function Filter({ onSearch }) {
     wifi: false,
     tv: false,
   });
-  const handleSearch = () => {
+  const searchHandler = () => {
     onSearch({ arrival, departure, numberOfPeople, amenities });
   };
-  const handleAmenityChange = (event) => {
+  const amenityChangeHandler = (event) => {
     setAmenities({
       ...amenities,
       [event.target.name]: event.target.checked,
+    });
+  };
+  const resetHandler = () => {
+    setArrival("");
+    setDeparture("");
+    setNumberOfPeople(0);
+    setAmenities({
+      airConditioning: false,
+      parkingSpace: false,
+      pets: false,
+      pool: false,
+      wifi: false,
+      tv: false,
     });
   };
   return (
@@ -59,7 +72,7 @@ export default function Filter({ onSearch }) {
               type="checkbox"
               name="airConditioning"
               checked={amenities.airConditioning}
-              onChange={handleAmenityChange}
+              onChange={amenityChangeHandler}
             />
             Klima uređaj
           </label>
@@ -68,7 +81,7 @@ export default function Filter({ onSearch }) {
               type="checkbox"
               name="parkingSpace"
               checked={amenities.parkingSpace}
-              onChange={handleAmenityChange}
+              onChange={amenityChangeHandler}
             />
             Parking mjesto
           </label>
@@ -77,7 +90,7 @@ export default function Filter({ onSearch }) {
               type="checkbox"
               name="pets"
               checked={amenities.pets}
-              onChange={handleAmenityChange}
+              onChange={amenityChangeHandler}
             />
             Kućni Ljubimci
           </label>
@@ -86,7 +99,7 @@ export default function Filter({ onSearch }) {
               type="checkbox"
               name="pool"
               checked={amenities.pool}
-              onChange={handleAmenityChange}
+              onChange={amenityChangeHandler}
             />
             Bazen
           </label>
@@ -95,7 +108,7 @@ export default function Filter({ onSearch }) {
               type="checkbox"
               name="wifi"
               checked={amenities.wifi}
-              onChange={handleAmenityChange}
+              onChange={amenityChangeHandler}
             />
             Wi-Fi
           </label>
@@ -104,16 +117,16 @@ export default function Filter({ onSearch }) {
               type="checkbox"
               name="tv"
               checked={amenities.tv}
-              onChange={handleAmenityChange}
+              onChange={amenityChangeHandler}
             />
             TV
           </label>
         </div>
       </div>
-      <button type="button" className="btn-search" onClick={handleSearch}>
+      <button type="button" className="btn-search" onClick={searchHandler}>
         Pretraži
       </button>
-      <button type="button" className="btn-clear">
+      <button type="button" className="btn-clear" onClick={resetHandler}>
         Očisti
       </button>
     </div>
