@@ -12,6 +12,27 @@ export default function Accommodation({ accommodation }) {
   } = accommodation;
   const [showDetails, setShowDetails] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const calculateTotalPrice = () => {
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const totalDays = (end - start) / (1000 * 60 * 60 * 24);
+      let totalPrice = 0;
+      for (let i = 0; i < pricelistInEuros.length; i++) {
+        const priceStart = new Date(pricelistInEuros[i].intervalStart);
+        const priceEnd = new Date(pricelistInEuros[i].intervalEnd);
+        if (start >= priceStart && end <= priceEnd) {
+          totalPrice = totalDays * pricelistInEuros[i].pricePerNight;
+          break;
+        }
+      }
+      return totalPrice;
+    }
+    return null;
+  };
+  const totalPrice = calculateTotalPrice();
   return (
     <div className={`div-accommodation ${expanded ? "expanded" : ""}`}>
       <div className="div-info">
@@ -23,6 +44,75 @@ export default function Accommodation({ accommodation }) {
         {beachDistanceInMeters && (
           <p>Udaljenost od plaže u metrima: {beachDistanceInMeters}m</p>
         )}
+
+        {showDetails && (
+          <div className="div-amenities">
+            <div className="div-amenities-price">
+              <div>
+                <h4>Dodatne usluge:</h4>
+                <ul>
+                  <li>
+                    Klima uređaj: {amenities.airConditioning ? "Da" : "Ne"}
+                  </li>
+                  <li>
+                    Parking mjesto: {amenities.parkingSpace ? "Da" : "Ne"}
+                  </li>
+                  <li>Kućni ljubimci: {amenities.pets ? "Da" : "Ne"}</li>
+                  <li>Bazen: {amenities.pool ? "Da" : "Ne"}</li>
+                  <li>Wi-fi: {amenities.wifi ? "Da" : "Ne"}</li>
+                  <li>TV: {amenities.tv ? "Da" : "Ne"}</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Cijena:</h4>
+                <ul>
+                  {pricelistInEuros.map((price, index) => {
+                    const startDate = new Date(price.intervalStart);
+                    const endDate = new Date(price.intervalEnd);
+                    const formattedStartDate = `${startDate.getDate()}.${
+                      startDate.getMonth() + 1
+                    }.`;
+                    const formattedEndDate = `${endDate.getDate()}.${
+                      endDate.getMonth() + 1
+                    }.`;
+
+                    return (
+                      <li key={index}>
+                        {formattedStartDate} - {formattedEndDate}:{" "}
+                        {price.pricePerNight}€
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+            <div className="div-rez">
+              <input
+                type="date"
+                className="input-date"
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+
+              <input
+                type="date"
+                className="input-date"
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+              {totalPrice ? (
+                <>
+                  <p>Ukupna cijena za odabrane datume: {totalPrice}€</p>
+                  <button className="btn-rez">Rezerviraj</button>
+                </>
+              ) : (
+                <p>
+                  Molimo odaberite datume boravka da biste vidjeli točnu cijenu
+                  i mogli rezervirati smještaj.
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+
         <button
           className="btn-show-more"
           onClick={() => {
@@ -32,43 +122,6 @@ export default function Accommodation({ accommodation }) {
         >
           {showDetails ? "Sakrij" : "Prikaži više"}
         </button>
-        {showDetails && (
-          <div className="div-amenities">
-            <div>
-              <h4>Dodatne usluge:</h4>
-              <ul>
-                <li>Klima uređaj: {amenities.airConditioning ? "Da" : "Ne"}</li>
-                <li>Parking mjesto: {amenities.parkingSpace ? "Da" : "Ne"}</li>
-                <li>Kućni ljubimci: {amenities.pets ? "Da" : "Ne"}</li>
-                <li>Bazen: {amenities.pool ? "Da" : "Ne"}</li>
-                <li>Wi-fi: {amenities.wifi ? "Da" : "Ne"}</li>
-                <li>TV: {amenities.tv ? "Da" : "Ne"}</li>
-              </ul>
-            </div>
-            <div>
-              <h4>Cijena:</h4>
-              <ul>
-                {pricelistInEuros.map((price, index) => {
-                  const startDate = new Date(price.intervalStart);
-                  const endDate = new Date(price.intervalEnd);
-                  const formattedStartDate = `${startDate.getDate()}.${
-                    startDate.getMonth() + 1
-                  }.`;
-                  const formattedEndDate = `${endDate.getDate()}.${
-                    endDate.getMonth() + 1
-                  }.`;
-
-                  return (
-                    <li key={index}>
-                      {formattedStartDate} - {formattedEndDate}:{" "}
-                      {price.pricePerNight}€
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

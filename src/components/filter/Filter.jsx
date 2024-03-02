@@ -13,6 +13,7 @@ export default function Filter({ onSearch }) {
     wifi: false,
     tv: false,
   });
+
   const searchHandler = () => {
     onSearch({ arrival, departure, numberOfPeople, amenities });
   };
@@ -37,6 +38,8 @@ export default function Filter({ onSearch }) {
   };
   return (
     <div className="filter-content">
+      <button className="btn-filter">Filtriraj</button>
+
       <h2>Filtriraj prema:</h2>
       <div className="div-filter">
         <div className="div-dates">

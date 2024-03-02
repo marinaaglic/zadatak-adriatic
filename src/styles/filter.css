@@ -37,6 +37,9 @@ input {
   cursor: pointer;
   margin-right: 10px;
 }
+.btn-filter {
+  display: none;
+}
 
 @media screen and (max-width: 786px) {
   .div-filter {
@@ -48,5 +51,20 @@ input {
   .div-amenities-filter {
     display: flex;
     flex-direction: column;
+  }
+
+  .btn-filter {
+    display: block;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    color: white;
+    background-color: #332fe2;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 0;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 10px;
   }
 }
