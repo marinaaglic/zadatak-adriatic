@@ -12,7 +12,10 @@ export const AccommodationProvider = ({ children }) => {
 
   return (
     <AccommodationContext.Provider
-      value={{ reservationDetails, setReservationDetails }}
+      value={{
+        reservationDetails,
+        setReservationDetails,
+      }}
     >
       {children}
     </AccommodationContext.Provider>

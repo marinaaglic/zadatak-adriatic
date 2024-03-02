@@ -26,7 +26,7 @@ export default function AccomodationList() {
     }
   }
 
-  const searchHandler = (filters) => {
+  function searchHandler(filters) {
     let filtered = accommodations;
 
     if (filters.arrival && filters.departure) {
@@ -38,14 +38,12 @@ export default function AccomodationList() {
         )
       );
     }
-
     if (filters.numberOfPeople) {
       filtered = filtered.filter(
         (accommodation) =>
           accommodation.capacity === Number(filters.numberOfPeople)
       );
     }
-
     for (const amenity in filters.amenities) {
       if (filters.amenities[amenity]) {
         filtered = filtered.filter(
@@ -53,9 +51,8 @@ export default function AccomodationList() {
         );
       }
     }
-
     setFilteredAccommodations(filtered);
-  };
+  }
 
   return (
     <div className="div-accommodation-list">

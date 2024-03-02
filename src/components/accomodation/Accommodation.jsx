@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "../../styles/accomodation.css";
-import { Link } from "react-router-dom";
 import { useAccommodationContext } from "../../context/AccommodationContext";
 import { useNavigate } from "react-router";
 
@@ -21,6 +20,7 @@ export default function Accommodation({ accommodation }) {
   const [numberOfPeople, setNumberOfPeople] = useState(null);
   const { setReservationDetails } = useAccommodationContext();
   const navigate = useNavigate();
+
   function calculateTotalPrice() {
     if (startDate && endDate) {
       const start = new Date(startDate);
