@@ -1,9 +1,9 @@
-import AccomodationList from "./components/accomodation/AccomodationList";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
     <>
-      <AccomodationList />
+      <AppRoutes />
     </>
   );
 }

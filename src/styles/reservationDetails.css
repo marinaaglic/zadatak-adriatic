@@ -1,0 +1,33 @@
+.reservation-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 80px;
+}
+
+.div-reservation-details {
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  font-weight: 500;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.link-back {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: white;
+  background-color: #332fe2;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 0;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+}

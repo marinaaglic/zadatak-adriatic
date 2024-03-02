@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../../styles/accomodation.css";
+import { Link } from "react-router-dom";
 
 export default function Accommodation({ accommodation }) {
   const {
@@ -14,25 +15,30 @@ export default function Accommodation({ accommodation }) {
   const [expanded, setExpanded] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const calculateTotalPrice = () => {
+  const [numberOfPeople, setNumberOfPeople] = useState(null);
+
+  function calculateTotalPrice() {
     if (startDate && endDate) {
       const start = new Date(startDate);
       const end = new Date(endDate);
       const totalDays = (end - start) / (1000 * 60 * 60 * 24);
       let totalPrice = 0;
+
       for (let i = 0; i < pricelistInEuros.length; i++) {
         const priceStart = new Date(pricelistInEuros[i].intervalStart);
         const priceEnd = new Date(pricelistInEuros[i].intervalEnd);
         if (start >= priceStart && end <= priceEnd) {
-          totalPrice = totalDays * pricelistInEuros[i].pricePerNight;
+          totalPrice =
+            numberOfPeople * totalDays * pricelistInEuros[i].pricePerNight;
           break;
         }
       }
       return totalPrice;
     }
     return null;
-  };
+  }
   const totalPrice = calculateTotalPrice();
+
   return (
     <div className={`div-accommodation ${expanded ? "expanded" : ""}`}>
       <div className="div-info">
@@ -98,10 +104,17 @@ export default function Accommodation({ accommodation }) {
                 className="input-date"
                 onChange={(e) => setEndDate(e.target.value)}
               />
+              <input
+                type="number"
+                placeholder="Broj osoba"
+                onChange={(e) => setNumberOfPeople(e.target.value)}
+              />
               {totalPrice ? (
                 <>
                   <p>Ukupna cijena za odabrane datume: {totalPrice}€</p>
-                  <button className="btn-rez">Rezerviraj</button>
+                  <Link to="/detalji-rezervacije" className="link-reservation">
+                    Rezerviraj
+                  </Link>
                 </>
               ) : (
                 <p>
