@@ -21,6 +21,16 @@ export default function Accommodation({ accommodation }) {
   const { setReservationDetails } = useAccommodationContext();
   const navigate = useNavigate();
 
+  let minPrice = Infinity;
+  let maxPrice = -Infinity;
+  pricelistInEuros.forEach((price) => {
+    if (price.pricePerNight < minPrice) {
+      minPrice = price.pricePerNight;
+    }
+    if (price.pricePerNight > maxPrice) {
+      maxPrice = price.pricePerNight;
+    }
+  });
   function calculateTotalPrice() {
     if (startDate && endDate) {
       const start = new Date(startDate);
@@ -135,8 +145,9 @@ export default function Accommodation({ accommodation }) {
                 </>
               ) : (
                 <p>
-                  Molimo odaberite datume boravka da biste vidjeli točnu cijenu
-                  i mogli rezervirati smještaj.
+                  Raspon cijena {minPrice}-{maxPrice}€. Molimo odaberite datume
+                  boravka da biste vidjeli točnu cijenu i mogli rezervirati
+                  smještaj.
                 </p>
               )}
             </div>
