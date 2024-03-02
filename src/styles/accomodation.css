@@ -44,6 +44,10 @@
   margin-top: 50px;
 }
 
+.div-rez {
+  width: 500px;
+}
+
 .div-amenities {
   display: flex;
   flex-direction: column;
@@ -88,6 +92,12 @@ img {
     display: flex;
   }
   .div-amenities-price {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .div-rez {
+    width: 300px;
     display: flex;
     flex-direction: column;
   }
