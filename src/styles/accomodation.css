@@ -20,6 +20,11 @@
   font-weight: bolder;
 }
 
+.table-price {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
 .btn-show-more,
 .link-reservation {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -44,22 +49,18 @@
   margin-top: 50px;
 }
 
-.div-rez {
+.div-reservation {
   width: 500px;
 }
 
-.div-amenities {
+.div-icons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .div-amenities-price {
   display: flex;
   flex-direction: row;
-}
-
-.div-amenities > div {
-  margin-left: 20px;
 }
 
 img {
@@ -88,15 +89,12 @@ img {
     margin-top: 50px;
   }
 
-  .div-amenities {
-    display: flex;
-  }
   .div-amenities-price {
     display: flex;
     flex-direction: column;
   }
 
-  .div-rez {
+  .div-reservation {
     width: 300px;
     display: flex;
     flex-direction: column;

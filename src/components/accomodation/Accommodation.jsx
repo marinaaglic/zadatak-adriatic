@@ -2,6 +2,13 @@ import { useState } from "react";
 import "../../styles/accomodation.css";
 import { useAccommodationContext } from "../../context/AccommodationContext";
 import { useNavigate } from "react-router";
+import { IoPeopleSharp } from "react-icons/io5";
+import { FaTv, FaUmbrellaBeach } from "react-icons/fa6";
+import { IoMdSnow } from "react-icons/io";
+import { FaParking } from "react-icons/fa";
+import { PiDog } from "react-icons/pi";
+import { FaSwimmingPool } from "react-icons/fa";
+import { FaWifi } from "react-icons/fa";
 
 export default function Accommodation({ accommodation }) {
   const {
@@ -70,32 +77,34 @@ export default function Accommodation({ accommodation }) {
         <img src={image} />
       </div>
       <div className="div-details">
-        <p>Broj osoba: {capacity}</p>
+        <p>
+          {capacity} <IoPeopleSharp />
+        </p>
         {beachDistanceInMeters && (
-          <p>Udaljenost od plaže u metrima: {beachDistanceInMeters}m</p>
+          <p>
+            {beachDistanceInMeters}m <FaUmbrellaBeach />
+          </p>
         )}
 
         {showDetails && (
-          <div className="div-amenities">
-            <div className="div-amenities-price">
-              <div>
-                <h4>Dodatne usluge:</h4>
-                <ul>
-                  <li>
-                    Klima uređaj: {amenities.airConditioning ? "Da" : "Ne"}
-                  </li>
-                  <li>
-                    Parking mjesto: {amenities.parkingSpace ? "Da" : "Ne"}
-                  </li>
-                  <li>Kućni ljubimci: {amenities.pets ? "Da" : "Ne"}</li>
-                  <li>Bazen: {amenities.pool ? "Da" : "Ne"}</li>
-                  <li>Wi-fi: {amenities.wifi ? "Da" : "Ne"}</li>
-                  <li>TV: {amenities.tv ? "Da" : "Ne"}</li>
-                </ul>
-              </div>
-              <div>
-                <h4>Cijena:</h4>
-                <ul>
+          <div className="div-amenities-price">
+            <div className="div-amenities">
+              <h4>Dodatne usluge:</h4>
+              <span>{amenities.airConditioning ? <IoMdSnow /> : null}</span>
+              <span>{amenities.parkingSpace ? <FaParking /> : null}</span>
+              <span>{amenities.pets ? <PiDog /> : null}</span>
+              <span> {amenities.pool ? <FaSwimmingPool /> : null}</span>
+              <span> {amenities.wifi ? <FaWifi /> : null}</span>
+              <span> {amenities.tv ? <FaTv /> : null}</span>
+
+              <table className="table-price">
+                <thead>
+                  <tr>
+                    <th>Datumi</th>
+                    <th>Cijena po noći (€)</th>
+                  </tr>
+                </thead>
+                <tbody>
                   {pricelistInEuros.map((price, index) => {
                     const startDate = new Date(price.intervalStart);
                     const endDate = new Date(price.intervalEnd);
@@ -106,33 +115,17 @@ export default function Accommodation({ accommodation }) {
                       endDate.getMonth() + 1
                     }.`;
 
+                    const interval = `${formattedStartDate} - ${formattedEndDate}`;
+
                     return (
-                      <li key={index}>
-                        {formattedStartDate} - {formattedEndDate}:{" "}
-                        {price.pricePerNight}€
-                      </li>
+                      <tr key={index}>
+                        <td>{interval}</td>
+                        <td>{price.pricePerNight}€</td>
+                      </tr>
                     );
                   })}
-                </ul>
-              </div>
-            </div>
-            <div className="div-rez">
-              <input
-                type="date"
-                className="input-date"
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-
-              <input
-                type="date"
-                className="input-date"
-                onChange={(e) => setEndDate(e.target.value)}
-              />
-              <input
-                type="number"
-                placeholder="Broj osoba"
-                onChange={(e) => setNumberOfPeople(e.target.value)}
-              />
+                </tbody>
+              </table>
               {totalPrice ? (
                 <>
                   <p>Ukupna cijena za odabrane datume: {totalPrice}€</p>
@@ -161,7 +154,7 @@ export default function Accommodation({ accommodation }) {
             setExpanded(!expanded);
           }}
         >
-          {showDetails ? "Sakrij" : "Prikaži više"}
+          {showDetails ? "Prikaži manje" : "Prikaži više"}
         </button>
       </div>
     </div>
