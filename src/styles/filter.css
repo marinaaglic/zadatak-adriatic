@@ -45,11 +45,6 @@ input {
   display: block;
 }
 
-.div-dates {
-  display: flex;
-  flex-direction: row;
-}
-
 .react-datepicker__input-container input {
   padding: 8px;
   width: 100px;

@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "../../styles/filter.css";
 import { useAccommodationContext } from "../../context/AccommodationContext";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 const initialAmenitiesState = {
   airConditioning: false,
@@ -13,8 +11,8 @@ const initialAmenitiesState = {
   tv: false,
 };
 export default function Filter({ onSearch }) {
-  const [arrival, setArrival] = useState(null);
-  const [departure, setDeparture] = useState(null);
+  const [arrival, setArrival] = useState("");
+  const [departure, setDeparture] = useState("");
   const [numberOfPeople, setNumberOfPeople] = useState(0);
   const [amenities, setAmenities] = useState(initialAmenitiesState);
   const { setFilterData } = useAccommodationContext();
@@ -41,6 +39,7 @@ export default function Filter({ onSearch }) {
     setNumberOfPeople(0);
     setAmenities(initialAmenitiesState);
   };
+
   return (
     <div className="filter-content">
       <button className="btn-filter" onClick={toggleForm}>
@@ -50,23 +49,19 @@ export default function Filter({ onSearch }) {
         <h2>Filtriraj prema:</h2>
         <div className="div-filter">
           <div className="div-dates">
-            <DatePicker
-              placeholderText="Dolazak"
-              selected={arrival}
-              name="arrival"
+            <input
+              type="date"
               value={arrival}
-              minDate={new Date("2024-01-01")}
-              maxDate={new Date("2024-12-31")}
-              onChange={(date) => setArrival(date)}
+              onChange={(e) => setArrival(e.target.value)}
+              min="2024-01-01"
+              max="2024-12-31"
             />
-            <DatePicker
-              placeholderText="Odlazak"
-              selected={departure}
-              name="departure"
+            <input
+              type="date"
               value={departure}
-              minDate={new Date("2024-01-01")}
-              maxDate={new Date("2024-12-31")}
-              onChange={(date) => setDeparture(date)}
+              onChange={(e) => setDeparture(e.target.value)}
+              min="2024-01-01"
+              max="2024-12-31"
             />
           </div>
           <div className="div-input">

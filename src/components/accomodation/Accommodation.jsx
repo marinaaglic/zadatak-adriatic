@@ -7,6 +7,7 @@ import { FaTv, FaUmbrellaBeach } from "react-icons/fa6";
 import { IoMdSnow } from "react-icons/io";
 import { FaParking, FaWifi, FaSwimmingPool } from "react-icons/fa";
 import { PiDog } from "react-icons/pi";
+import moment from "moment";
 
 export default function Accommodation({ accommodation }) {
   const {
@@ -35,28 +36,40 @@ export default function Accommodation({ accommodation }) {
   });
 
   function calculateTotalPrice() {
-    if (!filterData.arrival || !filterData.departure) return null;
+    if (filterData.arrival && filterData.departure) {
+      const start = new Date(filterData.arrival);
+      const end = new Date(filterData.departure);
+      const totalDays = (end - start) / (1000 * 60 * 60 * 24);
+      let totalPrice = 0;
 
-    const start = new Date(filterData.arrival);
-    const end = new Date(filterData.departure);
-    const totalDays = (end - start) / (1000 * 60 * 60 * 24);
-
-    for (const price of pricelistInEuros) {
-      const priceStart = new Date(price.intervalStart);
-      const priceEnd = new Date(price.intervalEnd);
-
-      if (start >= priceStart && end <= priceEnd) {
-        return filterData.numberOfPeople * totalDays * price.pricePerNight;
+      for (let i = 0; i < pricelistInEuros.length; i++) {
+        const priceStart = new Date(pricelistInEuros[i].intervalStart);
+        priceStart.setHours(0, 0, 0, 0);
+        const priceEnd = new Date(pricelistInEuros[i].intervalEnd);
+        priceEnd.setHours(0, 0, 0, 0);
+        if (start >= priceStart && end <= priceEnd) {
+          totalPrice =
+            filterData.numberOfPeople *
+            totalDays *
+            pricelistInEuros[i].pricePerNight;
+          break;
+        }
       }
+      return totalPrice;
     }
     return null;
   }
+
   const totalPrice = calculateTotalPrice();
 
   const reservationHandler = () => {
+    const formattedArrival = moment(filterData.arrival).format("DD/MM/YYYY");
+    const formattedDeparture = moment(filterData.departure).format(
+      "DD/MM/YYYY"
+    );
     setReservationDetails({
       accommodationName: title,
-      stayPeriod: `${filterData.arrival} - ${filterData.departure}`,
+      stayPeriod: `${formattedArrival} - ${formattedDeparture}`,
       numberOfPeople: filterData.numberOfPeople,
       totalPrice: totalPrice,
     });
@@ -81,12 +94,37 @@ export default function Accommodation({ accommodation }) {
           <div className="div-amenities-price">
             <div className="div-amenities">
               <h4>Dodatne usluge:</h4>
-              <span>{amenities.airConditioning ? <IoMdSnow /> : null}</span>
-              <span>{amenities.parkingSpace ? <FaParking /> : null}</span>
-              <span>{amenities.pets ? <PiDog /> : null}</span>
-              <span> {amenities.pool ? <FaSwimmingPool /> : null}</span>
-              <span> {amenities.wifi ? <FaWifi /> : null}</span>
-              <span> {amenities.tv ? <FaTv /> : null}</span>
+              {amenities.airConditioning ? (
+                <span className="amenity">
+                  <IoMdSnow /> Klimatizacija
+                </span>
+              ) : null}
+              {amenities.parkingSpace ? (
+                <span className="amenity">
+                  <FaParking /> Parking mjesto
+                </span>
+              ) : null}
+              {amenities.pets ? (
+                <span className="amenity">
+                  <PiDog /> Kućni ljubimci
+                </span>
+              ) : null}
+              {amenities.pool ? (
+                <span className="amenity">
+                  <FaSwimmingPool /> Bazen
+                </span>
+              ) : null}
+              {amenities.wifi ? (
+                <span className="amenity">
+                  <FaWifi /> Wi-Fi
+                </span>
+              ) : null}
+              {amenities.tv ? (
+                <span className="amenity">
+                  <FaTv /> TV
+                </span>
+              ) : null}
+
               <table className="table-price">
                 <thead>
                   <tr>

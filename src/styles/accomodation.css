@@ -68,6 +68,13 @@ img {
   height: auto;
 }
 
+.amenity {
+  font-size: 13px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 @media screen and (max-width: 786px) {
   .div-accommodation {
     border-radius: 10px;
@@ -98,5 +105,12 @@ img {
     width: 300px;
     display: flex;
     flex-direction: column;
+  }
+  .amenity {
+    display: inline-flex;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 40%;
   }
 }
