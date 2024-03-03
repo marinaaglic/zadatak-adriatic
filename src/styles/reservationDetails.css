@@ -21,13 +21,20 @@
 .link-back {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  color: white;
-  background-color: #332fe2;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  border: 0;
-  font-size: 13px;
-  cursor: pointer;
-  text-decoration: none;
+  color: #332fe2;
+  font-size: 15px;
+}
+
+@media screen and (max-width: 786px) {
+  .reservation-content {
+    font-size: 12px;
+    padding: 20px;
+  }
+  .link-back {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    color: #332fe2;
+    font-size: 12px;
+    cursor: pointer;
+  }
 }

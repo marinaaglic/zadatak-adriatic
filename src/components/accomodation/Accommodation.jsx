@@ -93,7 +93,6 @@ export default function Accommodation({ accommodation }) {
         {showDetails && (
           <div className="div-amenities-price">
             <div className="div-amenities">
-              <h4>Dodatne usluge:</h4>
               {amenities.airConditioning ? (
                 <span className="amenity">
                   <IoMdSnow /> Klimatizacija
