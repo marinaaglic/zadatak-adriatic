@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Accommodation from "./Accommodation";
 import axios from "axios";
 import Filter from "../filter/Filter";
-
 import "../../styles/accomodationList.css";
 
 export default function AccomodationList() {
@@ -40,8 +39,7 @@ export default function AccomodationList() {
     }
     if (filters.numberOfPeople) {
       filtered = filtered.filter(
-        (accommodation) =>
-          accommodation.capacity === Number(filters.numberOfPeople)
+        (accommodation) => accommodation.capacity >= filters.numberOfPeople
       );
     }
     for (const amenity in filters.amenities) {

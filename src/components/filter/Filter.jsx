@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../../styles/filter.css";
+import { useAccommodationContext } from "../../context/AccommodationContext";
 
 export default function Filter({ onSearch }) {
   const [arrival, setArrival] = useState("");
@@ -13,6 +14,7 @@ export default function Filter({ onSearch }) {
     wifi: false,
     tv: false,
   });
+  const { setFilterData } = useAccommodationContext();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const toggleForm = () => {
     setIsFormOpen(!isFormOpen);
@@ -20,6 +22,11 @@ export default function Filter({ onSearch }) {
 
   const searchHandler = () => {
     onSearch({ arrival, departure, numberOfPeople, amenities });
+    setFilterData({
+      arrival: arrival,
+      departure: departure,
+      numberOfPeople: numberOfPeople,
+    });
   };
   const amenityChangeHandler = (event) => {
     setAmenities({
@@ -27,6 +34,7 @@ export default function Filter({ onSearch }) {
       [event.target.name]: event.target.checked,
     });
   };
+
   const resetHandler = () => {
     setArrival("");
     setDeparture("");
@@ -71,6 +79,7 @@ export default function Filter({ onSearch }) {
             <input
               type="number"
               name="numberOfPeople"
+              min={1}
               onChange={(e) => setNumberOfPeople(e.target.value)}
             />
           </div>

@@ -9,12 +9,19 @@ export const AccommodationProvider = ({ children }) => {
     numberOfPeople: 0,
     totalPrice: 0,
   });
+  const [filterData, setFilterData] = useState({
+    arrival: "",
+    departure: "",
+    numberOfPeople: 0,
+  });
 
   return (
     <AccommodationContext.Provider
       value={{
         reservationDetails,
         setReservationDetails,
+        filterData,
+        setFilterData,
       }}
     >
       {children}

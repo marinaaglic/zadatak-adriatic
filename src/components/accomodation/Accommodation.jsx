@@ -22,10 +22,7 @@ export default function Accommodation({ accommodation }) {
 
   const [showDetails, setShowDetails] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [numberOfPeople, setNumberOfPeople] = useState(null);
-  const { setReservationDetails } = useAccommodationContext();
+  const { filterData, setReservationDetails } = useAccommodationContext();
   const navigate = useNavigate();
 
   let minPrice = Infinity;
@@ -38,10 +35,11 @@ export default function Accommodation({ accommodation }) {
       maxPrice = price.pricePerNight;
     }
   });
+
   function calculateTotalPrice() {
-    if (startDate && endDate) {
-      const start = new Date(startDate);
-      const end = new Date(endDate);
+    if (filterData.arrival && filterData.departure) {
+      const start = new Date(filterData.arrival);
+      const end = new Date(filterData.departure);
       const totalDays = (end - start) / (1000 * 60 * 60 * 24);
       let totalPrice = 0;
 
@@ -50,7 +48,9 @@ export default function Accommodation({ accommodation }) {
         const priceEnd = new Date(pricelistInEuros[i].intervalEnd);
         if (start >= priceStart && end <= priceEnd) {
           totalPrice =
-            numberOfPeople * totalDays * pricelistInEuros[i].pricePerNight;
+            filterData.numberOfPeople *
+            totalDays *
+            pricelistInEuros[i].pricePerNight;
           break;
         }
       }
@@ -59,17 +59,15 @@ export default function Accommodation({ accommodation }) {
     return null;
   }
   const totalPrice = calculateTotalPrice();
-
   const reservationHandler = () => {
     setReservationDetails({
       accommodationName: title,
-      stayPeriod: `${startDate} - ${endDate}`,
-      numberOfPeople: numberOfPeople,
+      stayPeriod: `${filterData.arrival} - ${filterData.departure}`,
+      numberOfPeople: filterData.numberOfPeople,
       totalPrice: totalPrice,
     });
     navigate("/detalji-rezervacije");
   };
-
   return (
     <div className={`div-accommodation ${expanded ? "expanded" : ""}`}>
       <div className="div-info">
