@@ -3,10 +3,8 @@ import "../../styles/accomodation.css";
 import { useAccommodationContext } from "../../context/AccommodationContext";
 import { useNavigate } from "react-router";
 import { IoPeopleSharp } from "react-icons/io5";
-import { FaTv, FaUmbrellaBeach } from "react-icons/fa6";
-import { IoMdSnow } from "react-icons/io";
-import { FaParking, FaWifi, FaSwimmingPool } from "react-icons/fa";
-import { PiDog } from "react-icons/pi";
+import { FaUmbrellaBeach } from "react-icons/fa6";
+import calculateTotalPrice from "../../utils";
 import moment from "moment";
 
 export default function Accommodation({ accommodation }) {
@@ -19,48 +17,29 @@ export default function Accommodation({ accommodation }) {
     pricelistInEuros,
   } = accommodation;
 
+  const amenityNames = {
+    airConditioning: "Klimatizacija",
+    parkingSpace: "Parking mjesto",
+    pets: "Kućni ljubimci",
+    pool: "Bazen",
+    wifi: "Wi-Fi",
+    tv: "TV",
+  };
   const [showDetails, setShowDetails] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const { filterData, setReservationDetails } = useAccommodationContext();
   const navigate = useNavigate();
 
-  let minPrice = Infinity;
-  let maxPrice = -Infinity;
-  pricelistInEuros.forEach((price) => {
-    if (price.pricePerNight < minPrice) {
-      minPrice = price.pricePerNight;
-    }
-    if (price.pricePerNight > maxPrice) {
-      maxPrice = price.pricePerNight;
-    }
-  });
+  const pricesPerNight = pricelistInEuros.map((price) => price.pricePerNight);
+  let minPrice = Math.min(...pricesPerNight);
+  let maxPrice = Math.max(...pricesPerNight);
 
-  function calculateTotalPrice() {
-    if (filterData.arrival && filterData.departure) {
-      const start = new Date(filterData.arrival);
-      const end = new Date(filterData.departure);
-      const totalDays = (end - start) / (1000 * 60 * 60 * 24);
-      let totalPrice = 0;
+  const formatDate = (date) => {
+    const newDate = new Date(date);
+    return `${newDate.getDate()}.${newDate.getMonth() + 1}.`;
+  };
 
-      for (let i = 0; i < pricelistInEuros.length; i++) {
-        const priceStart = new Date(pricelistInEuros[i].intervalStart);
-        priceStart.setHours(0, 0, 0, 0);
-        const priceEnd = new Date(pricelistInEuros[i].intervalEnd);
-        priceEnd.setHours(0, 0, 0, 0);
-        if (start >= priceStart && end <= priceEnd) {
-          totalPrice =
-            filterData.numberOfPeople *
-            totalDays *
-            pricelistInEuros[i].pricePerNight;
-          break;
-        }
-      }
-      return totalPrice;
-    }
-    return null;
-  }
-
-  const totalPrice = calculateTotalPrice();
+  const totalPrice = calculateTotalPrice(filterData, pricelistInEuros);
 
   const reservationHandler = () => {
     const formattedArrival = moment(filterData.arrival).format("DD/MM/YYYY");
@@ -93,37 +72,11 @@ export default function Accommodation({ accommodation }) {
         {showDetails && (
           <div className="div-amenities-price">
             <div className="div-amenities">
-              {amenities.airConditioning ? (
-                <span className="amenity">
-                  <IoMdSnow /> Klimatizacija
-                </span>
-              ) : null}
-              {amenities.parkingSpace ? (
-                <span className="amenity">
-                  <FaParking /> Parking mjesto
-                </span>
-              ) : null}
-              {amenities.pets ? (
-                <span className="amenity">
-                  <PiDog /> Kućni ljubimci
-                </span>
-              ) : null}
-              {amenities.pool ? (
-                <span className="amenity">
-                  <FaSwimmingPool /> Bazen
-                </span>
-              ) : null}
-              {amenities.wifi ? (
-                <span className="amenity">
-                  <FaWifi /> Wi-Fi
-                </span>
-              ) : null}
-              {amenities.tv ? (
-                <span className="amenity">
-                  <FaTv /> TV
-                </span>
-              ) : null}
-
+              {Object.keys(amenities).map((key) =>
+                amenities[key] ? (
+                  <span className="amenity">{amenityNames[key]}</span>
+                ) : null
+              )}
               <table className="table-price">
                 <thead>
                   <tr>
@@ -133,15 +86,10 @@ export default function Accommodation({ accommodation }) {
                 </thead>
                 <tbody>
                   {pricelistInEuros.map((price, index) => {
-                    const startDate = new Date(price.intervalStart);
-                    const endDate = new Date(price.intervalEnd);
-                    const formattedStartDate = `${startDate.getDate()}.${
-                      startDate.getMonth() + 1
-                    }.`;
-                    const formattedEndDate = `${endDate.getDate()}.${
-                      endDate.getMonth() + 1
-                    }.`;
+                    const formattedStartDate = formatDate(price.intervalStart);
+                    const formattedEndDate = formatDate(price.intervalEnd);
                     const interval = `${formattedStartDate} - ${formattedEndDate}`;
+
                     return (
                       <tr key={index}>
                         <td>{interval}</td>
