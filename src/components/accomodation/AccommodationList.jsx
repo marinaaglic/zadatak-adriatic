@@ -25,15 +25,17 @@ export default function AccomodationList() {
     }
   }
 
-  function searchHandler(filters) {
+  function searchAccommodations(filters) {
     let filtered = accommodations;
 
     if (filters.arrival && filters.departure) {
+      const arrivalDate = new Date(filters.arrival);
+      const departureDate = new Date(filters.departure);
       filtered = filtered.filter((accommodation) =>
         accommodation.availableDates.some(
           (date) =>
-            date.intervalStart <= filters.departure &&
-            date.intervalEnd >= filters.arrival
+            new Date(date.intervalStart) <= departureDate &&
+            new Date(date.intervalEnd) >= arrivalDate
         )
       );
     }
@@ -54,7 +56,7 @@ export default function AccomodationList() {
 
   return (
     <div className="div-accommodation-list">
-      <Filter onSearch={searchHandler} />
+      <Filter onSearch={searchAccommodations} />
       <h3>Accomodations:</h3>
       <div className="accommodation-grid">
         {filteredAccommodations.length > 0 ? (

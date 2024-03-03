@@ -5,10 +5,8 @@ import { useNavigate } from "react-router";
 import { IoPeopleSharp } from "react-icons/io5";
 import { FaTv, FaUmbrellaBeach } from "react-icons/fa6";
 import { IoMdSnow } from "react-icons/io";
-import { FaParking } from "react-icons/fa";
+import { FaParking, FaWifi, FaSwimmingPool } from "react-icons/fa";
 import { PiDog } from "react-icons/pi";
-import { FaSwimmingPool } from "react-icons/fa";
-import { FaWifi } from "react-icons/fa";
 
 export default function Accommodation({ accommodation }) {
   const {
@@ -37,28 +35,24 @@ export default function Accommodation({ accommodation }) {
   });
 
   function calculateTotalPrice() {
-    if (filterData.arrival && filterData.departure) {
-      const start = new Date(filterData.arrival);
-      const end = new Date(filterData.departure);
-      const totalDays = (end - start) / (1000 * 60 * 60 * 24);
-      let totalPrice = 0;
+    if (!filterData.arrival || !filterData.departure) return null;
 
-      for (let i = 0; i < pricelistInEuros.length; i++) {
-        const priceStart = new Date(pricelistInEuros[i].intervalStart);
-        const priceEnd = new Date(pricelistInEuros[i].intervalEnd);
-        if (start >= priceStart && end <= priceEnd) {
-          totalPrice =
-            filterData.numberOfPeople *
-            totalDays *
-            pricelistInEuros[i].pricePerNight;
-          break;
-        }
+    const start = new Date(filterData.arrival);
+    const end = new Date(filterData.departure);
+    const totalDays = (end - start) / (1000 * 60 * 60 * 24);
+
+    for (const price of pricelistInEuros) {
+      const priceStart = new Date(price.intervalStart);
+      const priceEnd = new Date(price.intervalEnd);
+
+      if (start >= priceStart && end <= priceEnd) {
+        return filterData.numberOfPeople * totalDays * price.pricePerNight;
       }
-      return totalPrice;
     }
     return null;
   }
   const totalPrice = calculateTotalPrice();
+
   const reservationHandler = () => {
     setReservationDetails({
       accommodationName: title,
@@ -83,7 +77,6 @@ export default function Accommodation({ accommodation }) {
             {beachDistanceInMeters}m <FaUmbrellaBeach />
           </p>
         )}
-
         {showDetails && (
           <div className="div-amenities-price">
             <div className="div-amenities">
@@ -94,7 +87,6 @@ export default function Accommodation({ accommodation }) {
               <span> {amenities.pool ? <FaSwimmingPool /> : null}</span>
               <span> {amenities.wifi ? <FaWifi /> : null}</span>
               <span> {amenities.tv ? <FaTv /> : null}</span>
-
               <table className="table-price">
                 <thead>
                   <tr>
@@ -112,9 +104,7 @@ export default function Accommodation({ accommodation }) {
                     const formattedEndDate = `${endDate.getDate()}.${
                       endDate.getMonth() + 1
                     }.`;
-
                     const interval = `${formattedStartDate} - ${formattedEndDate}`;
-
                     return (
                       <tr key={index}>
                         <td>{interval}</td>
@@ -144,7 +134,6 @@ export default function Accommodation({ accommodation }) {
             </div>
           </div>
         )}
-
         <button
           className="btn-show-more"
           onClick={() => {

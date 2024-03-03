@@ -1,32 +1,32 @@
 import { useState } from "react";
 import "../../styles/filter.css";
 import { useAccommodationContext } from "../../context/AccommodationContext";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
+const initialAmenitiesState = {
+  airConditioning: false,
+  parkingSpace: false,
+  pets: false,
+  pool: false,
+  wifi: false,
+  tv: false,
+};
 export default function Filter({ onSearch }) {
-  const [arrival, setArrival] = useState("");
-  const [departure, setDeparture] = useState("");
+  const [arrival, setArrival] = useState(null);
+  const [departure, setDeparture] = useState(null);
   const [numberOfPeople, setNumberOfPeople] = useState(0);
-  const [amenities, setAmenities] = useState({
-    airConditioning: false,
-    parkingSpace: false,
-    pets: false,
-    pool: false,
-    wifi: false,
-    tv: false,
-  });
+  const [amenities, setAmenities] = useState(initialAmenitiesState);
   const { setFilterData } = useAccommodationContext();
   const [isFormOpen, setIsFormOpen] = useState(false);
+
   const toggleForm = () => {
     setIsFormOpen(!isFormOpen);
   };
 
   const searchHandler = () => {
     onSearch({ arrival, departure, numberOfPeople, amenities });
-    setFilterData({
-      arrival: arrival,
-      departure: departure,
-      numberOfPeople: numberOfPeople,
-    });
+    setFilterData({ arrival, departure, numberOfPeople });
   };
   const amenityChangeHandler = (event) => {
     setAmenities({
@@ -39,14 +39,7 @@ export default function Filter({ onSearch }) {
     setArrival("");
     setDeparture("");
     setNumberOfPeople(0);
-    setAmenities({
-      airConditioning: false,
-      parkingSpace: false,
-      pets: false,
-      pool: false,
-      wifi: false,
-      tv: false,
-    });
+    setAmenities(initialAmenitiesState);
   };
   return (
     <div className="filter-content">
@@ -57,21 +50,23 @@ export default function Filter({ onSearch }) {
         <h2>Filtriraj prema:</h2>
         <div className="div-filter">
           <div className="div-dates">
-            <input
-              type="date"
+            <DatePicker
+              placeholderText="Dolazak"
+              selected={arrival}
               name="arrival"
-              placeholder="Dolazak"
-              min="2024-01-01"
               value={arrival}
-              onChange={(e) => setArrival(e.target.value)}
+              minDate={new Date("2024-01-01")}
+              maxDate={new Date("2024-12-31")}
+              onChange={(date) => setArrival(date)}
             />
-            <input
-              type="date"
+            <DatePicker
+              placeholderText="Odlazak"
+              selected={departure}
               name="departure"
-              placeholder="Odlazak"
-              max="2024-12-31"
               value={departure}
-              onChange={(e) => setDeparture(e.target.value)}
+              minDate={new Date("2024-01-01")}
+              maxDate={new Date("2024-12-31")}
+              onChange={(date) => setDeparture(date)}
             />
           </div>
           <div className="div-input">
@@ -79,6 +74,7 @@ export default function Filter({ onSearch }) {
             <input
               type="number"
               name="numberOfPeople"
+              value={numberOfPeople}
               min={1}
               onChange={(e) => setNumberOfPeople(e.target.value)}
             />
