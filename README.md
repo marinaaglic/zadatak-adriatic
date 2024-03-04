@@ -1,8 +1,33 @@
-# React + Vite
+# Naslov projekta
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ovaj projekat je izrađen koristeći ReactJS i Context za upravljanje stanjem. Cilj projekta je izraditi stranicu s izlistom smještaja.
 
-Currently, two official plugins are available:
+## Instalacija
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Da biste instalirali i pokrenuli ovaj projekat, slijedite ove korake:
+
+1. Klonirajte repozitorijum:
+   git clone link-do-vašeg-repozitorijuma
+
+2. Instalirajte zavisnosti:
+   cd ime-vašeg-projekta npm install
+
+3. Pokrenite projekt:
+   npm start
+
+## Funkcionalnosti
+
+- Prikazuje listu smještaja dobijenu sa endpointa `https://api.adriatic.hr/test/accommodation`.
+- Svaki smještaj prikazuje sliku, naziv, kapacitet i udaljenost do plaže.
+- Kontrola za prikaz dodatnih informacija o smještaju.
+- Filtriranje smještaja po datumima boravka, broju osoba i dodatnoj ponudi.
+- Mogućnost rezervacije smještaja.
+
+## Tehnologije
+
+- ReactJS
+- Context API za upravljanje stanjem
+
+## Kontakt
+
+Ako imate pitanja ili sugestije, slobodno me kontaktirajte na email@example.com.

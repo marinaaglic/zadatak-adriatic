@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../../styles/filter.css";
 import { useAccommodationContext } from "../../context/AccommodationContext";
+import { amenityNames } from "../accomodation/Accommodation";
 
 const initialAmenitiesState = {
   airConditioning: false,
@@ -77,60 +78,17 @@ export default function Filter({ onSearch }) {
           </div>
           <div className="div-amenities-filter">
             <label>Dodatne usluge:</label>
-            <label>
-              <input
-                type="checkbox"
-                name="airConditioning"
-                checked={amenities.airConditioning}
-                onChange={amenityChangeHandler}
-              />
-              Klima uređaj
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="parkingSpace"
-                checked={amenities.parkingSpace}
-                onChange={amenityChangeHandler}
-              />
-              Parking mjesto
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="pets"
-                checked={amenities.pets}
-                onChange={amenityChangeHandler}
-              />
-              Kućni Ljubimci
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="pool"
-                checked={amenities.pool}
-                onChange={amenityChangeHandler}
-              />
-              Bazen
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="wifi"
-                checked={amenities.wifi}
-                onChange={amenityChangeHandler}
-              />
-              Wi-Fi
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="tv"
-                checked={amenities.tv}
-                onChange={amenityChangeHandler}
-              />
-              TV
-            </label>
+            {Object.keys(amenityNames).map((amenity) => (
+              <label key={amenity}>
+                <input
+                  type="checkbox"
+                  name={amenity}
+                  checked={amenities[amenity]}
+                  onChange={amenityChangeHandler}
+                />
+                {amenityNames[amenity]}
+              </label>
+            ))}
           </div>
         </div>
         <button type="button" className="btn-search" onClick={searchHandler}>

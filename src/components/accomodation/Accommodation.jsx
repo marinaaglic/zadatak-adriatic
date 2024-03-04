@@ -7,6 +7,14 @@ import { FaUmbrellaBeach } from "react-icons/fa6";
 import calculateTotalPrice from "../../utils/functions";
 import moment from "moment";
 
+export const amenityNames = {
+  airConditioning: "Klimatizacija",
+  parkingSpace: "Parking",
+  pets: "Ljubimci",
+  pool: "Bazen",
+  wifi: "Wi-Fi",
+  tv: "TV",
+};
 export default function Accommodation({ accommodation }) {
   const {
     title,
@@ -17,14 +25,6 @@ export default function Accommodation({ accommodation }) {
     pricelistInEuros,
   } = accommodation;
 
-  const amenityNames = {
-    airConditioning: "Klimatizacija",
-    parkingSpace: "Parking mjesto",
-    pets: "Kućni ljubimci",
-    pool: "Bazen",
-    wifi: "Wi-Fi",
-    tv: "TV",
-  };
   const [showDetails, setShowDetails] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const { filterData, setReservationDetails } = useAccommodationContext();
