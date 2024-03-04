@@ -1,30 +1,22 @@
 import { useState, useEffect } from "react";
 import Accommodation from "./Accommodation";
-import axios from "axios";
 import Filter from "../filter/Filter";
 import "../../styles/accomodationList.css";
-import { searchAccommodations } from "../../utils";
+import { fetchData } from "../../utils/api/api";
+import { searchAccommodations } from "../../utils/functions/index";
 
 export default function AccomodationList() {
   const [accommodations, setAccommodations] = useState([]);
   const [filteredAccommodations, setFilteredAccommodations] = useState([]);
 
   useEffect(() => {
-    getAccomodations();
-  }, []);
-
-  async function getAccomodations() {
-    try {
-      const response = await axios.get(
-        "https://api.adriatic.hr/test/accommodation"
-      );
-
-      setAccommodations(response.data);
-      setFilteredAccommodations(response.data);
-    } catch (error) {
-      console.error("Error fetching accommodations:", error);
+    async function getAccommodations() {
+      const data = await fetchData();
+      setAccommodations(data);
+      setFilteredAccommodations(data);
     }
-  }
+    getAccommodations();
+  }, []);
 
   function handleSearch(filters) {
     const filtered = searchAccommodations(accommodations, filters);

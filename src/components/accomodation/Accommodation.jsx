@@ -4,7 +4,7 @@ import { useAccommodationContext } from "../../context/AccommodationContext";
 import { useNavigate } from "react-router";
 import { IoPeopleSharp } from "react-icons/io5";
 import { FaUmbrellaBeach } from "react-icons/fa6";
-import calculateTotalPrice from "../../utils";
+import calculateTotalPrice from "../../utils/functions";
 import moment from "moment";
 
 export default function Accommodation({ accommodation }) {
@@ -74,7 +74,9 @@ export default function Accommodation({ accommodation }) {
             <div className="div-amenities">
               {Object.keys(amenities).map((key) =>
                 amenities[key] ? (
-                  <span className="amenity">{amenityNames[key]}</span>
+                  <span key={key} className="amenity">
+                    {amenityNames[key]}
+                  </span>
                 ) : null
               )}
               <table className="table-price">

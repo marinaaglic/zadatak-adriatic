@@ -22,7 +22,6 @@
 
 .table-price {
   margin-top: 20px;
-  margin-bottom: 10px;
 }
 
 .btn-show-more,
@@ -75,6 +74,23 @@ img {
   border-radius: 5px;
 }
 
+@media screen and (max-width: 1024px) {
+  .div-accommodation {
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 10px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    transition: none;
+  }
+  .div-accommodation.expanded {
+    transform: none;
+  }
+}
+
 @media screen and (max-width: 786px) {
   .div-accommodation {
     border-radius: 10px;
@@ -111,6 +127,6 @@ img {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 40%;
+    width: 30%;
   }
 }
