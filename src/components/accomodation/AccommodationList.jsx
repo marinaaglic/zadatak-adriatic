@@ -8,12 +8,14 @@ import { searchAccommodations } from "../../utils/functions/index";
 export default function AccomodationList() {
   const [accommodations, setAccommodations] = useState([]);
   const [filteredAccommodations, setFilteredAccommodations] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getAccommodations() {
       const data = await fetchData();
       setAccommodations(data);
       setFilteredAccommodations(data);
+      setLoading(false);
     }
     getAccommodations();
   }, []);
@@ -23,7 +25,7 @@ export default function AccomodationList() {
     setFilteredAccommodations(filtered);
   }
 
-  if (!filteredAccommodations) {
+  if (loading) {
     return <div>Učitavanje...</div>;
   }
   return (
