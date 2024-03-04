@@ -56,6 +56,7 @@ export default function Filter({ onSearch }) {
               min="2024-01-01"
               max="2024-12-31"
             />
+
             <input
               type="date"
               value={departure}

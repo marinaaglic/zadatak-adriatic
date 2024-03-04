@@ -45,11 +45,6 @@ input {
   display: block;
 }
 
-.react-datepicker__input-container input {
-  padding: 8px;
-  width: 100px;
-}
-
 @media screen and (max-width: 786px) {
   .div-filter {
     display: flex;

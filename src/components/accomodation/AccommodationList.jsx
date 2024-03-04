@@ -23,6 +23,9 @@ export default function AccomodationList() {
     setFilteredAccommodations(filtered);
   }
 
+  if (!filteredAccommodations) {
+    return <div>Učitavanje...</div>;
+  }
   return (
     <div className="div-accommodation-list">
       <Filter onSearch={handleSearch} />
