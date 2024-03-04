@@ -1,33 +1,33 @@
-# Naslov projekta
+# Accommodation App
 
-Ovaj projekat je izrađen koristeći ReactJS i Context za upravljanje stanjem. Cilj projekta je izraditi stranicu s izlistom smještaja.
+This project is built using ReactJS and Context to manage state. The goal of the project is to create a page with a list of accommodation.
 
-## Instalacija
+## Installation
 
-Da biste instalirali i pokrenuli ovaj projekat, slijedite ove korake:
+To install and run this project, follow these steps:
 
-1. Klonirajte repozitorijum:
-   git clone link-do-vašeg-repozitorijuma
+1. Clone the repository:
+    git clone link-to-your-repository
 
-2. Instalirajte zavisnosti:
-   cd ime-vašeg-projekta npm install
+2. Install dependency:
+    cd your-project-name npm install
 
-3. Pokrenite projekt:
-   npm start
+3. Start the project:
+    npm start
 
-## Funkcionalnosti
+## Functionalities
 
-- Prikazuje listu smještaja dobijenu sa endpointa `https://api.adriatic.hr/test/accommodation`.
-- Svaki smještaj prikazuje sliku, naziv, kapacitet i udaljenost do plaže.
-- Kontrola za prikaz dodatnih informacija o smještaju.
-- Filtriranje smještaja po datumima boravka, broju osoba i dodatnoj ponudi.
-- Mogućnost rezervacije smještaja.
+- Displays the accommodation list obtained from the `https://api.adriatic.hr/test/accommodation' endpoint.
+- Each accommodation shows a picture, name, capacity and distance to the beach.
+- Control for displaying additional information about accommodation.
+- Filtering accommodation by dates of stay, number of people and additional offer.
+- Possibility of booking accommodation.
 
-## Tehnologije
+## Technologies
 
 - ReactJS
-- Context API za upravljanje stanjem
+- Context API for state management
 
-## Kontakt
+## Contact
 
-Ako imate pitanja ili sugestije, slobodno me kontaktirajte na email@example.com.
+If you have any questions or suggestions, please feel free to contact me at email@example.com.
