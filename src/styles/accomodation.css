@@ -13,7 +13,6 @@
 }
 
 .div-accommodation.expanded {
-  transform: scale(1.05);
   grid-column: span 2;
 }
 .div-info h4 {
