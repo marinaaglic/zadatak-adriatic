@@ -13,7 +13,7 @@ To install and run this project, follow these steps:
     cd your-project-name npm install
 
 3. Start the project:
-    npm start
+    npm run dev
 
 ## Functionalities
 
@@ -27,7 +27,3 @@ To install and run this project, follow these steps:
 
 - ReactJS
 - Context API for state management
-
-## Contact
-
-If you have any questions or suggestions, please feel free to contact me at email@example.com.
